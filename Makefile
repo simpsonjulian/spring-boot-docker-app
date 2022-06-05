@@ -6,7 +6,11 @@ app.war:
 docker: app.war
 	docker build --platform linux/amd64 --build-arg JAR_FILE=build/libs/\demo-$(VERSION).war -t demo:$(VERSION) .
 
-deploy: docker
+
+test: docker
+	./packaging_test.sh $(VERSION)
+
+deploy: test
 	envsubst < kubernetes.yml | kubectl apply -f -
 
 clean:
