@@ -13,16 +13,21 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 @SpringBootTest
 @AutoConfigureMockMvc
-
-
-public class WebTest {
+class WebTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    public void shouldReturnDefaultMessage() throws Exception {
+    void shouldReturnDefaultMessage() throws Exception {
         this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString("This is a Spring Boot app on Docker")));
+    }
+
+    @Test
+    void shouldHaveStatusURl() throws Exception {
+        this.mockMvc.perform(get("/status")).andDo(print()).andExpect(status().isOk())
+                .andExpect(content().string(containsString("OK")));
+
     }
 }

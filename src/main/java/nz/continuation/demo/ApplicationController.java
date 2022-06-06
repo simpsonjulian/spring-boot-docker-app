@@ -15,8 +15,11 @@ public class ApplicationController {
 
     @GetMapping("/")
     public String home() {
-        return String.format("This is a Spring Boot app on Docker - version %s ", version );
+        return String.format("This is a Spring Boot app on Docker - version %s ", version);
     }
+
+    @GetMapping("/status")
+    public String status() { return "OK"; }
 
     public static void main(String[] args) {
         SpringApplication.run(ApplicationController.class, args);
