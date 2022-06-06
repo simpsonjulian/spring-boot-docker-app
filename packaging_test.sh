@@ -18,6 +18,7 @@ container_id=$(docker run -d -p 8080:8080 --platform linux/amd64 demo:$VERSION )
 echo "Spun up container with ID ${container_id}"
 sleep 30
 curl -s http://localhost:8080 | grep Docker
+curl -s http://localhost:8080/status | grep OK
 echo "^^^ some output from the container was found."
 
 
