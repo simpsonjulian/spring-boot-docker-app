@@ -1,6 +1,6 @@
 export VERSION=1.0.0
 app.war:
-	 ./gradlew -Pversion=$(VERSION) build war
+	 ./gradlew -Pversion=$(VERSION) clean build war
 	ls build/libs
 
 docker: app.war
