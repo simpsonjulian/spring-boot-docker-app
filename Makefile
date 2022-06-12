@@ -13,7 +13,7 @@ clean:
 	./gradlew clean
 
 deploy:
-	envsubst < kubernetes/deploy.yml | kubectl apply -f -
+	(cd tf && terraform apply  -auto-approve)
 
 
 .PHONEY: app.war docker clean test cluster
