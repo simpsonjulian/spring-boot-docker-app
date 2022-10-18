@@ -3,7 +3,10 @@ app.war:
 	 ./gradlew -Pversion=$(VERSION) clean build war
 	ls build/libs
 
-docker: app.war
+lint:
+	docker run --rm -i hadolint/hadolint < Dockerfile
+
+docker: app.war lint
 	docker build --platform linux/amd64 --build-arg JAR_FILE=build/libs/\demo-$(VERSION).war -t demo:$(VERSION) .
 
 test: docker
@@ -16,4 +19,5 @@ deploy:
 	(cd tf && terraform apply  -auto-approve)
 
 
-.PHONEY: app.war docker clean test cluster
+
+.PHONEY: app.war docker clean test cluster lint
